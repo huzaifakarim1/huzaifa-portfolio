@@ -5,12 +5,16 @@ import { Room } from "./Room";
 import HeroLights from "./HeroLights";
 import Particles from "./Particles";
 
-const HeroExperience = () => {
+const HeroExperience = ({ active = true }) => {
   const isTablet = useMediaQuery({ query: "(max-width: 1024px)" });
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 
   return (
-    <Canvas camera={{ position: [0, 0, 15], fov: 45 }}>
+    <Canvas
+      frameloop={active ? "always" : "never"}
+      dpr={[1, 1.5]}
+      camera={{ position: [0, 0, 15], fov: 45 }}
+    >
       <OrbitControls
         enablePan={false}
         enableZoom={!isTablet}

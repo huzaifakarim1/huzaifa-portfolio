@@ -1,6 +1,7 @@
 import AnimatedCounter from "../components/AnimatedCounter";
 import Button from "../components/Button";
 import HeroExperience from "../components/HeroModels/HeroExperience";
+import LazyView from "../components/LazyView";
 import { words } from "../constants/index";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -60,7 +61,7 @@ const Hero = () => {
               <h1>that Deliver Results</h1>
             </div>
 
-            <p className="text-white-50 md:text-xl relative z-10 pointer-events-none">
+            <p className="text-white-50 md:text-xl relative z-10 pointer-events-none max-w-xl lg:max-w-2xl">
               Hi, I'm Huzaifa, a passionate Full-Stack Developer based in
               Pakistan who loves turning ideas into reality.
             </p>
@@ -75,9 +76,9 @@ const Hero = () => {
         {/* Right: 3D Model*/}
 
         <figure>
-          <div className="hero-3d-layout">
-            <HeroExperience />
-          </div>
+          <LazyView className="hero-3d-layout" eager>
+            {(visible) => <HeroExperience active={visible} />}
+          </LazyView>
         </figure>
       </div>
 

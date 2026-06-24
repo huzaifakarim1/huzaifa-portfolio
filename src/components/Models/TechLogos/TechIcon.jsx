@@ -1,9 +1,13 @@
 import { Environment, Float, OrbitControls, useGLTF } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import * as THREE from "three";
+import LazyView from "../../LazyView";
 
-const TechIcon = ({ model }) => {
+// The model + Canvas live in their own component so that useGLTF (which kicks
+// off the model download) only runs once LazyView has mounted it — i.e. when
+// the skills section scrolls into view, instead of on initial page load.
+const TechModel = ({ model, active }) => {
   const scene = useGLTF(model.modelPath);
 
   useEffect(() => {
@@ -14,10 +18,10 @@ const TechIcon = ({ model }) => {
         }
       });
     }
-  }, [scene]);
+  }, [scene, model.name]);
 
   return (
-    <Canvas>
+    <Canvas frameloop={active ? "always" : "never"} dpr={[1, 1.5]}>
       <ambientLight intensity={0.3} />
       <directionalLight position={[5, 5, 5]} intensity={1} />
       <Environment preset="city" />
@@ -29,6 +33,18 @@ const TechIcon = ({ model }) => {
         </group>
       </Float>
     </Canvas>
+  );
+};
+
+const TechIcon = ({ model }) => {
+  return (
+    <LazyView className="w-full h-full">
+      {(visible) => (
+        <Suspense fallback={null}>
+          <TechModel model={model} active={visible} />
+        </Suspense>
+      )}
+    </LazyView>
   );
 };
 
