@@ -67,7 +67,7 @@ const Hero = () => {
             </p>
 
             <Button
-              className="md:w-80 md:h-16 w-52 h-11"
+              className="md:w-80 md:h-16 w-48 h-11 mb-4 md:mb-0"
               id="button"
               text="See my Work"
             />
