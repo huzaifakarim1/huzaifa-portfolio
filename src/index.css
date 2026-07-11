@@ -181,7 +181,7 @@ section {
     }
 
     .first-project-wrapper {
-      @apply h-full flex flex-col justify-between xl:w-[60%];
+      @apply h-full flex flex-col justify-between;
 
       .image-wrapper {
         @apply xl:h-[70vh] md:h-[50vh] h-96 relative;
@@ -218,6 +218,38 @@ section {
       h2 {
         @apply text-lg md:text-xl lg:text-2xl font-semibold mt-5;
       }
+    }
+  }
+
+  .project-placeholder {
+    @apply w-full h-full rounded-xl flex items-center justify-center;
+
+    span {
+      @apply text-7xl font-bold text-black/15 select-none;
+    }
+  }
+
+  .project-link {
+    @apply inline-flex items-center gap-1.5 text-sm text-white-50 border border-white/15 rounded-full px-4 py-1.5 transition-all duration-300 hover:bg-white hover:text-black hover:border-white;
+  }
+
+  .project-empty {
+    @apply text-center py-20 px-6 rounded-xl border border-dashed border-white/15 bg-black-100;
+  }
+
+  .project-arrow {
+    @apply w-12 h-12 rounded-full border border-white/15 flex items-center justify-center text-white transition-all duration-300 hover:bg-white hover:text-black hover:border-white disabled:opacity-30 disabled:pointer-events-none;
+
+    svg {
+      @apply w-5 h-5;
+    }
+  }
+
+  .project-dot {
+    @apply h-2 w-2 rounded-full bg-white/20 transition-all duration-300 hover:bg-white/40;
+
+    &.active {
+      @apply w-6 bg-blue-50;
     }
   }
 

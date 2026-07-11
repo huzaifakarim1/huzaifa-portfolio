@@ -1,7 +1,7 @@
 const navLinks = [
     {
-        name: "Work",
-        link: "#work",
+        name: "Projects",
+        link: "#projects",
     },
     {
         name: "Experience",
@@ -247,6 +247,130 @@ const testimonials = [
     },
 ];
 
+const projectCategories = [
+    "All",
+    "Frontend",
+    "Fullstack",
+    "Game Dev",
+    "AI/ML",
+    "Data Science",
+];
+
+// NOTE: project1/2/3.png are the real screenshots; the rest are placeholders
+// (no `image` -> a pastel placeholder shows) to swap for real thumbnails later.
+const projects = [
+    {
+        id: "ryde",
+        title: "On-Demand Rides Made Simple with Ryde",
+        desc: "A ride-hailing app built with React Native, Expo & TailwindCSS for a fast, user-friendly experience.",
+        category: "Fullstack",
+        tags: ["React Native", "Expo", "TailwindCSS"],
+        image: "/images/project1.png",
+        bg: "bg-[#e8f3ff]",
+        github: "#",
+        live: "#",
+    },
+    {
+        id: "library",
+        title: "Library Management Platform",
+        desc: "Manage book catalogs, lending and members in one place.",
+        category: "Fullstack",
+        tags: ["MERN", "JWT"],
+        image: "/images/project2.png",
+        bg: "bg-[#ffefdb]",
+        github: "#",
+        live: "#",
+    },
+    {
+        id: "yc",
+        title: "YC Directory – A Startup Showcase App",
+        desc: "Submit ideas, vote on pitches and get noticed by the community.",
+        category: "Fullstack",
+        tags: ["Next.js", "Sanity"],
+        image: "/images/project3.png",
+        bg: "bg-[#ffe7eb]",
+        github: "#",
+        live: "#",
+    },
+    {
+        id: "ecommerce",
+        title: "E-Commerce Store",
+        desc: "A full storefront with cart, checkout and an admin dashboard.",
+        category: "Fullstack",
+        tags: ["MERN", "Stripe"],
+        bg: "bg-[#e6f6ee]",
+        github: "#",
+        live: "#",
+    },
+    {
+        id: "portfolio",
+        title: "3D Developer Portfolio",
+        desc: "This very site — built with Vite, React, Three.js and GSAP.",
+        category: "Frontend",
+        tags: ["Vite", "Three.js", "GSAP"],
+        bg: "bg-[#e8f3ff]",
+        github: "#",
+        live: "#",
+    },
+    {
+        id: "weather",
+        title: "Weather Dashboard",
+        desc: "Live forecasts with a clean, responsive interface.",
+        category: "Frontend",
+        tags: ["React", "API"],
+        bg: "bg-[#fff3e6]",
+        github: "#",
+        live: "#",
+    },
+    {
+        id: "movies",
+        title: "Movie Finder",
+        desc: "Search and discover films in a sleek, fast grid.",
+        category: "Frontend",
+        tags: ["React", "TailwindCSS"],
+        bg: "bg-[#fdeef0]",
+        github: "#",
+        live: "#",
+    },
+    {
+        id: "platformer",
+        title: "2D Platformer Game",
+        desc: "A side-scroller with physics, enemies and handcrafted levels.",
+        category: "Game Dev",
+        tags: ["Unity", "C#"],
+        bg: "bg-[#ffefdb]",
+        github: "#",
+        // not web-based -> no `live` link (omit the field to hide the button)
+    },
+    {
+        id: "puzzle",
+        title: "Memory Puzzle Game",
+        desc: "A timed card-matching browser game.",
+        category: "Game Dev",
+        tags: ["JavaScript", "Canvas"],
+        bg: "bg-[#e6f6ee]",
+        github: "#",
+    },
+    {
+        id: "classifier",
+        title: "Image Classifier",
+        desc: "A CNN that labels images in real time.",
+        category: "AI/ML",
+        tags: ["Python", "TensorFlow"],
+        bg: "bg-[#e8f3ff]",
+        github: "#",
+    },
+    {
+        id: "chatbot",
+        title: "AI Chatbot Assistant",
+        desc: "A context-aware assistant with a clean chat UI.",
+        category: "AI/ML",
+        tags: ["Python", "LLM"],
+        bg: "bg-[#fff3e6]",
+        github: "#",
+    },
+];
+
 const socialImgs = [
     {
         name: "insta",
@@ -282,4 +406,6 @@ export {
     techStackIcons,
     techStackImgs,
     navLinks,
+    projects,
+    projectCategories,
 };
