@@ -36,6 +36,32 @@ const ProjectLinks = ({ project, className = "" }) => (
   </div>
 );
 
+const Arrow = ({ dir, onClick, disabled, className = "" }) => (
+  <button
+    className={`carousel-arrow ${className}`}
+    onClick={onClick}
+    disabled={disabled}
+    aria-label={dir === "prev" ? "Previous projects" : "Next projects"}
+  >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d={dir === "prev" ? "M15 18l-6-6 6-6" : "M9 18l6-6-6-6"} />
+    </svg>
+  </button>
+);
+
+const Dots = ({ total, page, onSelect, className = "" }) => (
+  <div className={`flex gap-2 ${className}`}>
+    {Array.from({ length: total }).map((_, i) => (
+      <button
+        key={i}
+        onClick={() => onSelect(i)}
+        className={`project-dot ${i === page ? "active" : ""}`}
+        aria-label={`Go to page ${i + 1}`}
+      />
+    ))}
+  </div>
+);
+
 const ShowcaseSection = () => {
   const sectionRef = useRef(null);
   const [active, setActive] = useState("All");
@@ -55,6 +81,9 @@ const ShowcaseSection = () => {
     setActive(cat);
     setPage(0);
   };
+
+  const goPrev = () => setPage((p) => Math.max(0, p - 1));
+  const goNext = () => setPage((p) => Math.min(totalPages - 1, p + 1));
 
   // Stagger the cards in on first view and whenever the category or page changes.
   useGSAP(
@@ -99,71 +128,74 @@ const ShowcaseSection = () => {
           </div>
         ) : (
           <>
-            <div className="showcaselayout">
-              {/* Featured project (fills the row when it's the only one on the page) */}
-              <div
-                className={`first-project-wrapper js-project ${
-                  rest.length ? "xl:w-[60%]" : "xl:w-full"
-                }`}
-              >
-                <ProjectImage project={featured} />
-                <div className="text-content">
-                  <h2>{featured.title}</h2>
-                  <p className="text-white-50 md:text-xl">{featured.desc}</p>
-                  <ProjectLinks project={featured} className="pt-2" />
-                </div>
+            {/* Mobile / tablet controls — sit above the projects so paging never
+                requires scrolling down to reach the arrows. */}
+            {totalPages > 1 && (
+              <div className="flex xl:hidden items-center justify-center gap-5">
+                <Arrow dir="prev" onClick={goPrev} disabled={page === 0} />
+                <Dots total={totalPages} page={page} onSelect={setPage} />
+                <Arrow dir="next" onClick={goNext} disabled={page === totalPages - 1} />
               </div>
+            )}
 
-              {/* Remaining projects on this page */}
-              {rest.length > 0 && (
-                <div className="project-list-wrapper overflow-hidden">
-                  {rest.map((project) => (
-                    <div className="project js-project" key={project.id}>
-                      <ProjectImage project={project} />
-                      <h2>{project.title}</h2>
-                      <ProjectLinks project={project} className="mt-4" />
-                    </div>
-                  ))}
-                </div>
+            {/* Desktop arrows flank the projects (vertically centered in the
+                side gutters) so there is nothing to scroll to. */}
+            <div className="relative xl:px-16">
+              {totalPages > 1 && (
+                <>
+                  <Arrow
+                    dir="prev"
+                    onClick={goPrev}
+                    disabled={page === 0}
+                    className="hidden xl:flex absolute left-0 top-1/2 -translate-y-1/2 z-20"
+                  />
+                  <Arrow
+                    dir="next"
+                    onClick={goNext}
+                    disabled={page === totalPages - 1}
+                    className="hidden xl:flex absolute right-0 top-1/2 -translate-y-1/2 z-20"
+                  />
+                </>
               )}
+
+              <div className="showcaselayout">
+                {/* Featured project (fills the row when it's the only one on the page) */}
+                <div
+                  className={`first-project-wrapper js-project ${
+                    rest.length ? "xl:w-[60%]" : "xl:w-full"
+                  }`}
+                >
+                  <ProjectImage project={featured} />
+                  <div className="text-content">
+                    <h2>{featured.title}</h2>
+                    <p className="text-white-50 md:text-xl">{featured.desc}</p>
+                    <ProjectLinks project={featured} className="pt-2" />
+                  </div>
+                </div>
+
+                {/* Remaining projects on this page */}
+                {rest.length > 0 && (
+                  <div className="project-list-wrapper overflow-hidden">
+                    {rest.map((project) => (
+                      <div className="project js-project" key={project.id}>
+                        <ProjectImage project={project} />
+                        <h2>{project.title}</h2>
+                        <ProjectLinks project={project} className="mt-4" />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
 
-            {/* Pager — only when a category has more than one page of projects */}
+            {/* Desktop page indicator */}
             {totalPages > 1 && (
-              <div className="flex items-center justify-center gap-5">
-                <button
-                  className="project-arrow"
-                  onClick={() => setPage((p) => Math.max(0, p - 1))}
-                  disabled={page === 0}
-                  aria-label="Previous projects"
-                >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M15 18l-6-6 6-6" />
-                  </svg>
-                </button>
-
-                <div className="flex gap-2">
-                  {Array.from({ length: totalPages }).map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setPage(i)}
-                      className={`project-dot ${i === page ? "active" : ""}`}
-                      aria-label={`Go to page ${i + 1}`}
-                    />
-                  ))}
-                </div>
-
-                <button
-                  className="project-arrow"
-                  onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
-                  disabled={page === totalPages - 1}
-                  aria-label="Next projects"
-                >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M9 18l6-6-6-6" />
-                  </svg>
-                </button>
-              </div>
+              <Dots
+                total={totalPages}
+                page={page}
+                onSelect={setPage}
+                className="hidden xl:flex justify-center"
+              />
             )}
           </>
         )}
