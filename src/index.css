@@ -367,11 +367,61 @@ section {
       }
 
       img {
-        @apply inline-block;
+        @apply inline-block size-5 md:size-6 object-contain;
       }
     }
   }
 }
+
+/* Footer: download-resume dropdown (native <details>, opens upward) */
+.resume-menu {
+  position: relative;
+  width: fit-content;
+}
+.resume-menu > summary {
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  color: var(--color-white-50, #d9ecff);
+  transition: color 0.3s;
+}
+.resume-menu > summary::-webkit-details-marker { display: none; }
+.resume-menu > summary::after {
+  content: "▾";
+  font-size: 0.75em;
+  opacity: 0.7;
+  transition: transform 0.3s;
+}
+.resume-menu[open] > summary::after { transform: rotate(180deg); }
+.resume-menu > summary:hover { color: #fff; }
+.resume-options {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  min-width: 210px;
+  padding: 6px;
+  border-radius: 12px;
+  background: var(--color-black-100, #0e0e10);
+  border: 1px solid var(--color-black-50, #1c1c21);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  z-index: 30;
+}
+@media (min-width: 768px) {
+  .resume-options { left: 0; transform: none; }
+}
+.resume-options a {
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: var(--color-white-50, #d9ecff);
+  transition: background 0.25s;
+}
+.resume-options a:hover { background: var(--color-black-50, #1c1c21); }
 
 /* Hero text slider starts */
 .slide {
@@ -472,6 +522,193 @@ section {
   }
 }
 /* marquee end */
+
+/* ===== Certifications marquee + credential panel ===== */
+.cert-section {
+  width: 100dvw;
+  margin-top: 5rem;
+  margin-bottom: 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+@media (min-width: 768px) {
+  .cert-section { margin-top: 10rem; margin-bottom: 9rem; }
+}
+
+.cert-marquee {
+  position: relative;
+  overflow: hidden;
+  padding: 58px 0 30px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.cert-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  /* --cert-shift (one set's width) and --cert-dur are set from JS after the
+     logos are measured, so the loop shifts by exactly one set => no gap/jump. */
+  animation: cert-scroll var(--cert-dur, 45s) linear infinite;
+}
+.cert-set {
+  display: flex;
+  align-items: center;
+  flex: none;
+}
+.cert-marquee:hover .cert-track,
+.cert-marquee[data-paused="true"] .cert-track {
+  animation-play-state: paused;
+}
+@keyframes cert-scroll {
+  to { transform: translateX(calc(-1 * var(--cert-shift, 50%))); }
+}
+
+.cert-item {
+  position: relative;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 0;
+  padding: 0;
+  /* trailing margin on EVERY item (incl. the last) => seamless -50% loop */
+  margin: 0 56px 0 0;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.cert-item:hover,
+.cert-item:focus-visible { opacity: 1; transform: translateY(-2px); z-index: 30; }
+.cert-item:focus-visible {
+  outline: 2px solid var(--color-blue-50, #839cb5);
+  outline-offset: 10px;
+  border-radius: 6px;
+}
+
+/* LOGO SIZE CONTROL
+   - base height for every logo = 34px (change here to scale the whole row)
+   - per-logo tweak = the `scale` field on each issuer in constants/index.js */
+.cert-logo { display: flex; }
+.cert-logo svg {
+  height: calc(34px * var(--logo-scale, 1));
+  width: auto;
+  display: block;
+}
+
+.cert-tip {
+  position: absolute;
+  z-index: 20;
+  bottom: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  white-space: nowrap;
+  background: var(--color-black-100, #0e0e10);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--color-white-50, #d9ecff);
+  font-size: 12.5px;
+  padding: 7px 13px;
+  border-radius: 9999px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s, transform 0.25s;
+}
+.cert-tip b { color: var(--color-blue-50, #839cb5); font-weight: 500; }
+.cert-item:hover .cert-tip,
+.cert-item:focus-visible .cert-tip {
+  opacity: 1;
+  transform: translateX(-50%);
+}
+
+/* credential panel (modal) */
+.cert-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(6, 6, 8, 0.72);
+  backdrop-filter: blur(3px);
+  animation: cert-fade 0.2s ease;
+}
+@keyframes cert-fade { from { opacity: 0; } to { opacity: 1; } }
+.cert-modal-panel {
+  width: 100%;
+  max-width: 440px;
+  border-radius: 20px;
+  padding: 24px;
+}
+.cert-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 16px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.cert-modal-head .cert-logo svg { height: 30px; width: auto; }
+.cert-modal-close {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: none;
+  color: #6b7a8d;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.cert-modal-close:hover {
+  color: var(--color-white-50, #d9ecff);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.cert-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 2px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.cert-row:last-child { border-bottom: 0; }
+.cert-row-info { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.cert-row-title { font-size: 14px; color: var(--color-white-50, #d9ecff); line-height: 1.35; }
+.cert-row-meta {
+  font-size: 11.5px;
+  color: #6b7a8d;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+.cert-verify {
+  flex: none;
+  font-size: 12.5px;
+  color: var(--color-white-50, #d9ecff);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 9999px;
+  padding: 6px 13px;
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
+}
+.cert-verify:hover {
+  background: var(--color-white-50, #d9ecff);
+  color: #0b0b0d;
+  border-color: var(--color-white-50, #d9ecff);
+}
+
+@media (max-width: 640px) {
+  .cert-logo svg { height: calc(28px * var(--logo-scale, 1)); }
+  .cert-item { margin-right: 40px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cert-track { animation-duration: 160s; }
+  .cert-modal { animation: none; }
+}
 
 .card {
   --start: 0;

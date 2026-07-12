@@ -5,7 +5,17 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-container">
         <div className="flex flex-col justify-center md:items-start items-center">
-          <a href="/">Visit my blog</a>
+          <details className="resume-menu">
+            <summary>Download Resume</summary>
+            <div className="resume-options">
+              <a href="/resume/muhammad-huzaifa-karim-fullstack-resume.pdf" download>
+                Full-Stack Developer
+              </a>
+              <a href="/resume/muhammad-huzaifa-karim-ai-ml-resume.pdf" download>
+                AI / ML &amp; Data Science
+              </a>
+            </div>
+          </details>
         </div>
         <div className="socials">
           {socialImgs.map((img) => (

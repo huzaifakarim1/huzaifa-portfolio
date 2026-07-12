@@ -7,6 +7,8 @@ import LazyView from "../components/LazyView";
 const Contact = () => {
   const formRef = useRef(null);
   const [loading, setLoading] = useState(false);
+  // "idle" | "success" | "error" — drives the button label after submit
+  const [status, setStatus] = useState("idle");
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -18,8 +20,15 @@ const Contact = () => {
     setForm({ ...form, [name]: value });
   };
 
+  const flash = (next) => {
+    setStatus(next);
+    // revert to the normal label after a few seconds
+    setTimeout(() => setStatus("idle"), 3000);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true); // Show loading state
 
     try {
@@ -30,14 +39,24 @@ const Contact = () => {
         import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
       );
 
-      // Reset form and stop loading
+      // Reset form and confirm success
       setForm({ name: "", email: "", message: "" });
+      flash("success");
     } catch (error) {
-      console.error("EmailJS Error:", error); // Optional: show toast
+      console.error("EmailJS Error:", error);
+      flash("error");
     } finally {
       setLoading(false); // Always stop loading, even on error
     }
   };
+
+  const buttonLabel = loading
+    ? "Sending..."
+    : status === "success"
+    ? "Message Sent ✓"
+    : status === "error"
+    ? "Failed — Retry"
+    : "Send Message";
 
   return (
     <section id="contact" className="flex-center section-padding">
@@ -93,12 +112,10 @@ const Contact = () => {
                   />
                 </div>
 
-                <button type="submit">
-                  <div className="cta-button group">
+                <button type="submit" disabled={loading}>
+                  <div className="cta-button group" data-status={status}>
                     <div className="bg-circle" />
-                    <p className="text">
-                      {loading ? "Sending..." : "Send Message"}
-                    </p>
+                    <p className="text">{buttonLabel}</p>
                     <div className="arrow-wrapper">
                       <img src="/images/arrow-down.svg" alt="arrow" />
                     </div>

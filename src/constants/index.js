@@ -1,7 +1,13 @@
+import { CERT_LOGOS } from "./certLogos";
+
 const navLinks = [
     {
         name: "Projects",
         link: "#projects",
+    },
+    {
+        name: "Certifications",
+        link: "#certifications",
     },
     {
         name: "Experience",
@@ -74,18 +80,18 @@ const logoIconsList = [
 const abilities = [
     {
         imgPath: "/images/seo.png",
-        title: "Quality Focus",
-        desc: "Delivering high-quality results while maintaining attention to every detail.",
+        title: "Always Learning",
+        desc: "Constantly leveling up — with certifications from Meta, Google, IBM and more, applied in real projects.",
     },
     {
         imgPath: "/images/chat.png",
-        title: "Reliable Communication",
-        desc: "Keeping you updated at every step to ensure transparency and clarity.",
+        title: "Clear Communication",
+        desc: "Readable, well-documented code and the ability to explain technical decisions in plain language.",
     },
     {
         imgPath: "/images/time.png",
-        title: "On-Time Delivery",
-        desc: "Making sure projects are completed on schedule, with quality & attention to detail.",
+        title: "End-to-End Ownership",
+        desc: "I take projects from idea to deployment — building, testing, and shipping the whole thing myself.",
     },
 ];
 
@@ -373,14 +379,14 @@ const projects = [
 
 const socialImgs = [
     {
-        name: "insta",
-        url: "https://www.instagram.com/",
-        imgPath: "/images/insta.png",
+        name: "github",
+        url: "https://github.com/huzaifakarim1",
+        imgPath: "/images/github.svg",
     },
     {
-        name: "fb",
-        url: "https://www.facebook.com/",
-        imgPath: "/images/fb.png",
+        name: "gmail",
+        url: "mailto:karimhuzaifa590@gmail.com",
+        imgPath: "/images/gmail.svg",
     },
     {
         name: "x",
@@ -389,8 +395,143 @@ const socialImgs = [
     },
     {
         name: "linkedin",
-        url: "https://www.linkedin.com/",
+        url: "http://www.linkedin.com/in/muhammad-huzaifa-karim-590k",
         imgPath: "/images/linkedin.png",
+    },
+];
+
+// Certification issuers. Each holds one OR MANY credentials (clicking a logo
+// opens a panel listing them, each with its verify link).
+//   logo  -> inline SVG markup from ./certLogos (renders in Mona Sans)
+//   scale -> optional per-logo size tweak (1 = default, 0.85 = 15% smaller)
+const certifications = [
+    {
+        name: "Meta",
+        logo: CERT_LOGOS.meta,
+        certs: [
+            {
+                title: "Meta Front-End Developer",
+                date: "Jun 2025",
+                id: "4EDS5JSOZPG9",
+                href: "https://www.coursera.org/account/accomplishments/specialization/4EDS5JSOZPG9",
+            },
+        ],
+    },
+    {
+        name: "Google",
+        logo: CERT_LOGOS.google,
+        certs: [
+            {
+                title: "Google Prompting Essentials",
+                date: "Feb 2025",
+                id: "62SFMQ8S2A9K",
+                href: "https://www.coursera.org/account/accomplishments/verify/62SFMQ8S2A9K",
+            },
+            {
+                title: "Google AI Essentials",
+                date: "Jan 2025",
+                id: "K40HY6NUAQNQ",
+                href: "https://www.coursera.org/account/accomplishments/verify/K40HY6NUAQNQ",
+            },
+        ],
+    },
+    {
+        name: "IBM",
+        logo: CERT_LOGOS.ibm,
+        scale: 0.85,
+        certs: [
+            {
+                title: "Python for Data Science, AI & Development",
+                date: "Jun 2025",
+                id: "BR65XVK3DACW",
+                href: "https://www.coursera.org/account/accomplishments/records/BR65XVK3DACW",
+            },
+        ],
+    },
+    {
+        name: "University of Colorado",
+        logo: CERT_LOGOS.colorado,
+        certs: [
+            {
+                title: "C# Programming for Unity Game Development",
+                date: "May 2025",
+                id: "U8TBK28BFDHO",
+                href: "https://www.coursera.org/account/accomplishments/specialization/U8TBK28BFDHO",
+            },
+        ],
+    },
+    {
+        name: "DataCamp",
+        logo: CERT_LOGOS.datacamp,
+        certs: [
+            {
+                title: "AI Fundamentals",
+                date: "Jun 2025",
+                id: "AIF0028372837780",
+                href: "https://www.datacamp.com/skill-verification/AIF0028372837780",
+            },
+        ],
+    },
+    {
+        name: "Cisco",
+        logo: CERT_LOGOS.cisco,
+        certs: [
+            {
+                title: "JavaScript Essentials 1",
+                date: "Mar 2025",
+                id: null,
+                href: "https://www.credly.com/badges/7425c05b-68d7-442e-8cdd-79a610232a28/linked_in_profile",
+            },
+            {
+                title: "CCNA: Introduction to Networks",
+                date: "Jan 2023",
+                id: null,
+                href: "https://www.credly.com/badges/b9ef7e45-1681-40fa-b1e4-9354c2c1c83d/linked_in_profile",
+            },
+        ],
+    },
+    {
+        name: "Udacity",
+        logo: CERT_LOGOS.udacity,
+        certs: [
+            {
+                title: "AWS AI Practitioner Challenge",
+                date: "Jun 2026",
+                id: "d5e706dc-38a7-11f1-a9da-ff38514aaa17",
+                href: "https://www.udacity.com/certificate/e/d5e706dc-38a7-11f1-a9da-ff38514aaa17",
+            },
+        ],
+    },
+    {
+        name: "Harvard University",
+        logo: CERT_LOGOS.harvardx,
+        scale: 0.85,
+        certs: [
+            {
+                title: "CS50G: Introduction to Game Development",
+                date: "Jul 2024",
+                id: "13da20196ea4431a9d230bb003b7b3ec",
+                href: "https://courses.edx.org/certificates/13da20196ea4431a9d230bb003b7b3ec",
+            },
+        ],
+    },
+    {
+        name: "DigiSkills.pk",
+        logo: CERT_LOGOS.digiskills,
+        certs: [
+            {
+                title: "Virtual Assistant",
+                date: "Jul 2024",
+                id: "ZAF6C9RMK",
+                href: "https://digiskills.pk/verify/",
+            },
+            {
+                title: "Freelancing",
+                date: "Jul 2024",
+                id: "HUPCBKMMK",
+                href: "https://digiskills.pk/verify/",
+            },
+        ],
     },
 ];
 
@@ -408,4 +549,5 @@ export {
     navLinks,
     projects,
     projectCategories,
+    certifications,
 };
