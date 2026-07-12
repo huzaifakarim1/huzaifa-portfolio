@@ -18,8 +18,8 @@ const navLinks = [
         link: "#skills",
     },
     {
-        name: "Testimonials",
-        link: "#testimonials",
+        name: "Leadership",
+        link: "#leadership",
     },
 ];
 
@@ -153,8 +153,8 @@ const techStackIcons = [
 
 const expCards = [
     {
-        review:
-            "Adrian brought creativity and technical expertise to the team, significantly improving our frontend performance. His work has been invaluable in delivering faster experiences.",
+        // Technologies you used in this role — shown as pills on the card.
+        techStack: ["React", "JavaScript", "Tailwind CSS", "Redux", "Vite"],
         imgPath: "/images/exp1.png",
         logoPath: "/images/logo1.png",
         title: "Frontend Developer",
@@ -166,8 +166,7 @@ const expCards = [
         ],
     },
     {
-        review:
-            "Adrian’s contributions to Docker's web applications have been outstanding. He approaches challenges with a problem-solving mindset.",
+        techStack: ["React", "Node.js", "Express", "MongoDB", "REST APIs"],
         imgPath: "/images/exp2.png",
         logoPath: "/images/logo2.png",
         title: "Full Stack Developer",
@@ -179,8 +178,7 @@ const expCards = [
         ],
     },
     {
-        review:
-            "Adrian’s work on Appwrite’s mobile app brought a high level of quality and efficiency. He delivered solutions that enhanced our mobile experience & meet our product goals.",
+        techStack: ["React Native", "Expo", "TypeScript", "Appwrite"],
         imgPath: "/images/exp3.png",
         logoPath: "/images/logo3.png",
         title: "React Native Developer",
@@ -389,11 +387,6 @@ const socialImgs = [
         imgPath: "/images/gmail.svg",
     },
     {
-        name: "x",
-        url: "https://www.x.com/",
-        imgPath: "/images/x.png",
-    },
-    {
         name: "linkedin",
         url: "http://www.linkedin.com/in/muhammad-huzaifa-karim-590k",
         imgPath: "/images/linkedin.png",
@@ -535,6 +528,32 @@ const certifications = [
     },
 ];
 
+// Leadership & Achievements section. Edit the text / numbers below to taste.
+// The photo goes at:  public/images/leadership/smec-award.jpg
+const leadership = {
+    eyebrow: "University Leadership",
+    role: "FIFA Event Lead — SMEC",
+    image: "/images/leadership/smec-award.jpg",
+    imageAlt:
+        "Muhammad Huzaifa Karim receiving the FIFA event organizing award at SMEC",
+    ribbon: "🏆 Organizing Award",
+    captionHighlight: "SMEC '26",
+    caption: "— receiving the FIFA event organizing award",
+    editions: ["SMEC '24", "SMEC '26"],
+    blurb:
+        "Led the FIFA gaming module at my university's flagship engineering competition across two editions — owning the bracket format, volunteer roster, and match-day operations for a packed tournament floor of 100+ players.",
+    stats: [
+        { n: "100+", l: "Participants" },
+        { n: "2×", l: "Editions Led" },
+        { n: "3+", l: "Awards Won" },
+    ],
+    highlights: [
+        "Designed the tournament format, scheduling & on-the-spot dispute handling.",
+        "Coordinated a volunteer team to keep matches running back-to-back.",
+        "Recognized by the organizing committee across both editions.",
+    ],
+};
+
 export {
     words,
     abilities,
@@ -550,4 +569,5 @@ export {
     projects,
     projectCategories,
     certifications,
+    leadership,
 };
