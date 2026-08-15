@@ -62,8 +62,7 @@ const Hero = () => {
             </div>
 
             <p className="text-white-50 md:text-xl relative z-10 pointer-events-none max-w-xl lg:max-w-2xl">
-              Hi, I'm Huzaifa, a passionate Full-Stack Developer based in
-              Pakistan who loves turning ideas into reality.
+              Hi, I'm Huzaifa, exploring the intersection of Software Engineering, Artificial Intelligence, and Data Science to build impactful solutions.
             </p>
 
             <Button

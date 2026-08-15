@@ -64,6 +64,21 @@ const ExperienceSection = () => {
         />
 
         <div className="mt-32 relative">
+          <div className="timeline-wrapper">
+            <div className="timeline" />
+            <div
+              className="gradient-line w-1 h-full"
+              style={{
+                background: `linear-gradient(to bottom, ${expCards
+                  .map(
+                    (card, i) =>
+                      `${card.accent || "#52aeff"} ${(i / (expCards.length - 1)) * 100}%`
+                  )
+                  .join(", ")})`,
+              }}
+            />
+          </div>
+
           <div className="relative z-50 xl:space-y-32 space-y-10">
             {expCards.map((card, index) => (
               <div key={card.title} className="exp-card-wrapper">
@@ -76,11 +91,6 @@ const ExperienceSection = () => {
                 </div>
                 <div className="xl:w-4/6">
                   <div className="flex items-start">
-                    <div className="timeline-wrapper">
-                      <div className="timeline" />
-                      <div className="gradient-line w-1 h-full" />
-                    </div>
-
                     <div className="expText flex xl:gap-20 md:gap-10 gap-5 relative z-20">
                       <div className="timeline-logo">
                         <img src={card.logoPath} alt="logo" />
