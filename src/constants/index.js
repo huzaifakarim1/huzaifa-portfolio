@@ -36,8 +36,8 @@ const words = [
 
 const counterItems = [
     { value: 1, suffix: "+", label: "Years of Experience" },
-    { value: 15, suffix: "+", label: "Projects Completed" },
-    { value: 16, suffix: "+", label: "Certifications Earned" },
+    { value: 16, suffix: "+", label: "Projects Completed" },
+    { value: 15, suffix: "+", label: "Certifications Earned" },
     { value: 2058, suffix: "", label: "GitHub Contributions" },
 ];
 
@@ -194,20 +194,19 @@ const expCards = [
             "Add a third — keep them concrete and honest.",
         ],
     },
-    // --- READY FOR FUTURE (uncomment either to add a 4th/5th card) ---
-    {
-        accent: "#057e8d",
-        techStack: ["Add", "your", "tech"],
-        imgPath: "/images/companies/efu.svg",
-        logoPath: "/images/companies/efu-logo.svg",
-        title: "Your Role — EFU Life",
-        date: "Month Year - Month Year",
-        responsibilities: [
-            "Describe your work at EFU Life.",
-            "Second responsibility.",
-            "Third responsibility.",
-        ],
-    },
+    // {
+    //     accent: "#057e8d",
+    //     techStack: ["Add", "your", "tech"],
+    //     imgPath: "/images/companies/efu.svg",
+    //     logoPath: "/images/companies/efu-logo.svg",
+    //     title: "Your Role — EFU Life",
+    //     date: "Month Year - Month Year",
+    //     responsibilities: [
+    //         "Describe your work at EFU Life.",
+    //         "Second responsibility.",
+    //         "Third responsibility.",
+    //     ],
+    // },
     {
         accent: "#0075be",
         techStack: ["Add", "your", "tech"],
@@ -502,6 +501,12 @@ const certifications = [
                 date: "Jun 2025",
                 id: "4EDS5JSOZPG9",
                 href: "https://www.coursera.org/account/accomplishments/specialization/4EDS5JSOZPG9",
+            },
+            {
+                title: "Meta Introduction to Back-End Development",
+                date: "Jun 2025",
+                id: "C3BT3AYQEG45",
+                href: "https://www.coursera.org/account/accomplishments/verify/C3BT3AYQEG45",
             },
         ],
     },

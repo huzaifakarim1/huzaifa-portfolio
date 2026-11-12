@@ -10,12 +10,18 @@ gsap.registerPlugin(ScrollTrigger);
 const PER_PAGE = 3;
 
 const ProjectImage = ({ project }) => (
-  <div className={`image-wrapper ${project.bg}`}>
+  <div className="w-full overflow-hidden rounded-xl">
     {project.image ? (
-      <img src={project.image} alt={project.title} />
+      <img
+        src={project.image}
+        alt={project.title}
+        className="w-full h-auto block"
+      />
     ) : (
-      <div className="project-placeholder">
-        <span>{project.title.charAt(0)}</span>
+      <div className="min-h-48 bg-black-200 rounded-xl flex items-center justify-center">
+        <span className="text-7xl font-bold text-white/10 select-none">
+          {project.title.charAt(0)}
+        </span>
       </div>
     )}
   </div>

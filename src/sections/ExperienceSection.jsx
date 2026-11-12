@@ -9,46 +9,62 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ExperienceSection = () => {
   useGSAP(() => {
+    // Cards slide in from left on scroll down, reverse slide out on scroll up
     gsap.utils.toArray(".timeline-card").forEach((card) => {
-      gsap.from(card, {
-        xPercent: -100,
-        opacity: 0,
-        transformOrigin: "left left",
-        duration: 1,
-        ease: "power2.inOut",
+      gsap.fromTo(
+        card,
+        { xPercent: -100, opacity: 0 },
+        {
+          xPercent: 0,
+          opacity: 1,
+          transformOrigin: "left left",
+          duration: 1,
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 80%",
+            end: "top 40%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    });
+
+    // Timeline line: scrubs in real-time both ways as you scroll
+    gsap.fromTo(
+      ".timeline",
+      { scaleY: 1 },
+      {
+        scaleY: 0,
+        transformOrigin: "bottom bottom",
+        ease: "none",
         scrollTrigger: {
-          trigger: card,
-          start: "top 80%",
+          trigger: ".timeline",
+          start: "top center",
+          end: "70% center",
+          scrub: true,
         },
-      });
-    });
+      }
+    );
 
-    gsap.to(".timeline", {
-      transformOrigin: "bottom bottom",
-      ease: "power1.inOut",
-      scrollTrigger: {
-        trigger: ".timeline",
-        start: "top center",
-        end: "70% center",
-        onUpdate: (self) => {
-          gsap.to(".timeline", {
-            scaleY: 1 - self.progress,
-          });
-        },
-      },
-    });
-
+    // Text/logo blocks fade in going down, fade out going up
     gsap.utils.toArray(".expText").forEach((text) => {
-      gsap.from(text, {
-        xPercent: 0,
-        opacity: 0,
-        duration: 1,
-        ease: "power2.inOut",
-        scrollTrigger: {
-          trigger: text,
-          start: "top 60%",
-        },
-      });
+      gsap.fromTo(
+        text,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: text,
+            start: "top 70%",
+            end: "top 30%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
     });
   }, []);
 
