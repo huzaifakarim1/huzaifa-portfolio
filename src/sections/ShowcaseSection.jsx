@@ -9,28 +9,28 @@ gsap.registerPlugin(ScrollTrigger);
 
 const PER_PAGE = 3;
 
-// Preload an image URL into browser cache without blocking the UI thread.
+// Memory-safe background image preloader (avoids polluting document.head)
+const preloadedImages = new Set();
 const preloadImage = (src) => {
-  if (!src) return;
-  const link = document.createElement("link");
-  link.rel = "prefetch";
-  link.as = "image";
-  link.href = src;
-  document.head.appendChild(link);
+  if (!src || preloadedImages.has(src)) return;
+  preloadedImages.add(src);
+  const img = new Image();
+  img.decoding = "async";
+  img.src = src;
 };
 
 const ProjectImage = ({ project, priority = false }) => (
-  <div className="w-full overflow-hidden rounded-xl">
+  <div className="w-full aspect-[5/3] overflow-hidden rounded-xl bg-black-100">
     {project.image ? (
       <img
         src={project.image}
         alt={project.title}
-        className="w-full h-auto block"
+        className="w-full h-full object-cover block"
         decoding="async"
         loading={priority ? "eager" : "lazy"}
       />
     ) : (
-      <div className="min-h-48 bg-black-200 rounded-xl flex items-center justify-center">
+      <div className="w-full h-full bg-black-200 rounded-xl flex items-center justify-center">
         <span className="text-7xl font-bold text-white/10 select-none">
           {project.title.charAt(0)}
         </span>
@@ -59,6 +59,8 @@ const Arrow = ({ dir, onClick, disabled, className = "" }) => (
     className={`carousel-arrow ${className}`}
     onClick={onClick}
     disabled={disabled}
+    // Prevent the click from bubbling up and causing any layout recalc
+    onMouseDown={(e) => e.preventDefault()}
     aria-label={dir === "prev" ? "Previous projects" : "Next projects"}
   >
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -115,21 +117,19 @@ const ShowcaseSection = () => {
     });
   }, [page, active, filtered, totalPages]);
 
-  // Snappy card entrance — GPU-accelerated, overwrite prevents queuing if the
-  // user clicks arrows quickly back-to-back.
+  // Snappy card entrance with zero layout shift or vertical translation,
+  // keeping the carousel arrows perfectly stable and visible.
   useGSAP(
     () => {
       gsap.fromTo(
         ".js-project",
-        { y: 30, opacity: 0, force3D: true },
+        { opacity: 0 },
         {
-          y: 0,
           opacity: 1,
-          duration: 0.35,
-          stagger: 0.07,
+          duration: 0.28,
+          stagger: 0.05,
           ease: "power2.out",
           overwrite: "auto",
-          force3D: true,
         }
       );
     },
@@ -186,18 +186,18 @@ const ShowcaseSection = () => {
                     dir="prev"
                     onClick={goPrev}
                     disabled={page === 0}
-                    className="hidden xl:flex absolute left-0 top-1/2 -translate-y-1/2 z-20"
+                    className="hidden xl:flex absolute left-0 top-[490px] -translate-y-1/2 z-20"
                   />
                   <Arrow
                     dir="next"
                     onClick={goNext}
                     disabled={page === totalPages - 1}
-                    className="hidden xl:flex absolute right-0 top-1/2 -translate-y-1/2 z-20"
+                    className="hidden xl:flex absolute right-0 top-[490px] -translate-y-1/2 z-20"
                   />
                 </>
               )}
 
-              <div className="showcaselayout">
+              <div className="showcaselayout xl:min-h-[680px]">
                 {/* Featured project (fills the row when it's the only one on the page) */}
                 <div
                   className={`first-project-wrapper js-project ${
@@ -207,7 +207,7 @@ const ShowcaseSection = () => {
                   <ProjectImage project={featured} priority />
                   <div className="text-content">
                     <h2>{featured.title}</h2>
-                    <p className="text-white-50 md:text-xl">{featured.desc}</p>
+                    <p className="text-white-50 md:text-xl min-h-[3.5rem]">{featured.desc}</p>
                     <ProjectLinks project={featured} className="pt-2" />
                   </div>
                 </div>

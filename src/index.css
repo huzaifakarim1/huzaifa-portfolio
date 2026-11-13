@@ -222,7 +222,22 @@ section {
   }
 
   .carousel-arrow {
-    @apply w-12 h-12 rounded-full border border-white/15 bg-black-100/70 backdrop-blur-sm flex items-center justify-center text-white transition-all duration-300 hover:bg-white hover:text-black hover:border-white disabled:opacity-30 disabled:pointer-events-none shrink-0;
+    @apply w-12 h-12 rounded-full border border-white/20 bg-[#18181f] flex items-center justify-center text-white shrink-0 cursor-pointer shadow-md select-none;
+    /* Clean transitions on hover/disabled without layout lag or backdrop-blur bugs */
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+
+    &:hover:not(:disabled) {
+      @apply bg-white text-black border-white;
+      transform: scale(1.05);
+    }
+
+    &:active:not(:disabled) {
+      transform: scale(0.95);
+    }
+
+    &:disabled {
+      @apply opacity-40 cursor-not-allowed pointer-events-none;
+    }
 
     svg {
       @apply w-5 h-5;
