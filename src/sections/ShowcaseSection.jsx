@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -9,13 +9,25 @@ gsap.registerPlugin(ScrollTrigger);
 
 const PER_PAGE = 3;
 
-const ProjectImage = ({ project }) => (
+// Preload an image URL into browser cache without blocking the UI thread.
+const preloadImage = (src) => {
+  if (!src) return;
+  const link = document.createElement("link");
+  link.rel = "prefetch";
+  link.as = "image";
+  link.href = src;
+  document.head.appendChild(link);
+};
+
+const ProjectImage = ({ project, priority = false }) => (
   <div className="w-full overflow-hidden rounded-xl">
     {project.image ? (
       <img
         src={project.image}
         alt={project.title}
         className="w-full h-auto block"
+        decoding="async"
+        loading={priority ? "eager" : "lazy"}
       />
     ) : (
       <div className="min-h-48 bg-black-200 rounded-xl flex items-center justify-center">
@@ -91,13 +103,34 @@ const ShowcaseSection = () => {
   const goPrev = () => setPage((p) => Math.max(0, p - 1));
   const goNext = () => setPage((p) => Math.min(totalPages - 1, p + 1));
 
-  // Stagger the cards in on first view and whenever the category or page changes.
+  // Preload adjacent page images in the background whenever the page/category
+  // changes so the browser has them cached before the user clicks the arrow.
+  useEffect(() => {
+    const prevPage = page - 1;
+    const nextPage = page + 1;
+    [prevPage, nextPage].forEach((p) => {
+      if (p < 0 || p >= totalPages) return;
+      const items = filtered.slice(p * PER_PAGE, p * PER_PAGE + PER_PAGE);
+      items.forEach((proj) => preloadImage(proj.image));
+    });
+  }, [page, active, filtered, totalPages]);
+
+  // Snappy card entrance — GPU-accelerated, overwrite prevents queuing if the
+  // user clicks arrows quickly back-to-back.
   useGSAP(
     () => {
       gsap.fromTo(
         ".js-project",
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, stagger: 0.12, ease: "power2.out" }
+        { y: 30, opacity: 0, force3D: true },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.35,
+          stagger: 0.07,
+          ease: "power2.out",
+          overwrite: "auto",
+          force3D: true,
+        }
       );
     },
     { dependencies: [active, page], scope: sectionRef }
@@ -171,7 +204,7 @@ const ShowcaseSection = () => {
                     rest.length ? "xl:w-[60%]" : "xl:w-full"
                   }`}
                 >
-                  <ProjectImage project={featured} />
+                  <ProjectImage project={featured} priority />
                   <div className="text-content">
                     <h2>{featured.title}</h2>
                     <p className="text-white-50 md:text-xl">{featured.desc}</p>

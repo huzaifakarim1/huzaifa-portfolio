@@ -27,8 +27,8 @@ const GlowCard = ({ card, children, index }) => {
       className="card card-border timeline-card rounded-xl p-10 mb-5 break-inside-avoid-column"
     >
       <div className="glow" />
-      {card.techStack ? (
-        // Experience cards: show the tech used instead of a testimonial.
+      {card.techStack && (
+        // Experience cards: show the tech used.
         <div className="mb-5">
           <p className="text-[#839cb5] italic mb-3">Tech Stack</p>
           <div className="flex flex-wrap gap-2">
@@ -42,19 +42,7 @@ const GlowCard = ({ card, children, index }) => {
             ))}
           </div>
         </div>
-      ) : card.review ? (
-        // Fallback (e.g. testimonials): star rating + quote.
-        <>
-          <div className="flex items-center gap-1 mb-5">
-            {Array.from({ length: 5 }, (_, i) => (
-              <img src="/images/star.png" key={i} alt="star" className="size-5" />
-            ))}
-          </div>
-          <div className="mb-5">
-            <p className="text-white-50 text-lg">{card.review}</p>
-          </div>
-        </>
-      ) : null}
+      )}
       {children}
     </div>
   );
