@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import TitleHeader from "../components/TitleHeader";
 import ContactExperience from "../components/Models/contact/ContactExperience";
@@ -44,12 +44,12 @@ const Contact = () => {
   };
 
   // Update countdown every second when rate-limited
-  useState(() => {
+  useEffect(() => {
     const interval = setInterval(() => {
       setRateLimitMsg(checkRateLimit());
     }, 1000);
     return () => clearInterval(interval);
-  });
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -65,6 +65,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (loading) return;
+    if (formRef.current?.website?.value) return; // honeypot: bot detected
 
     const block = checkRateLimit();
     if (block) { setRateLimitMsg(block); return; }
@@ -163,6 +164,15 @@ const Contact = () => {
                     style={{ resize: "none" }}
                   />
                 </div>
+
+                <input
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  style={{ display: "none" }}
+                />
 
                 {isRateLimited && (
                   <p className="text-sm text-red-400 text-center -mt-3">
