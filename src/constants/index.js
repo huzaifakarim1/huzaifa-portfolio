@@ -36,9 +36,9 @@ const words = [
 
 const counterItems = [
     { value: 1, suffix: "+", label: "Years of Experience" },
-    { value: 16, suffix: "+", label: "Projects Completed" },
+    { value: 17, suffix: "+", label: "Projects Completed" },
     { value: 15, suffix: "+", label: "Certifications Earned" },
-    { value: 2058, suffix: "", label: "GitHub Contributions" },
+    { value: 2200, suffix: "", label: "GitHub Contributions" },
 ];
 
 
@@ -553,7 +553,7 @@ const leadership = {
     stats: [
         { n: "100+", l: "Participants" },
         { n: "2×", l: "Editions Led" },
-        { n: "3+", l: "Awards Won" },
+        { n: "2+", l: "Awards Won" },
     ],
     highlights: [
         "Designed the tournament format, scheduling & on-the-spot dispute handling.",
