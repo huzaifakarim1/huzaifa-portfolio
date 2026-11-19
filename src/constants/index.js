@@ -121,43 +121,43 @@ const techStackIcons = [
 // `accent` = the company's brand colour; drives that card's timeline line.
 // To add a company later, just add another object (or uncomment EFU/UBL below).
 const expCards = [
-    {
+     {
         accent: "#d9ecff",
-        techStack: ["React", "JavaScript", "Tailwind CSS", "Redux", "Vite"],
+        techStack: ["React", "TypeScript", "Node.js", "Express", "MongoDB"],
         imgPath: "/images/companies/10pearls.svg",
         logoPath: "/images/companies/10pearls-logo.svg",
-        title: "Your Role — 10Pearls",
-        date: "Month Year - Month Year",
+        title: "MERN Stack Intern — 10Pearls",
+        date: "Sep 2025 - Nov 2025",
         responsibilities: [
-            "Describe what you built or owned at 10Pearls.",
-            "Add a second real responsibility or achievement.",
-            "Add a third — keep them concrete and honest.",
+            "Built Scribo, a full-stack AI-powered notes application using React, TypeScript, Node.js, Express, and MongoDB.",
+            "Implemented secure authentication, Cloudinary integration, rich-text editing, and automated testing.",
+            "Deployed via CI/CD pipeline with GitHub Actions, shipping a production-ready full-stack application.",
         ],
     },
     {
         accent: "#F96435",
-        techStack: ["React", "Node.js", "Express", "MongoDB", "REST APIs"],
+        techStack: ["React", "Node.js", "Prisma", "PostgreSQL", "Shopify API"],
         imgPath: "/images/companies/superchat.svg",
         logoPath: "/images/companies/superchat-logo.svg",
-        title: "Your Role — Superchat",
-        date: "Month Year - Month Year",
+        title: "Junior Full Stack Developer — superchat.chat",
+        date: "Nov 2025 - Feb 2026",
         responsibilities: [
-            "Describe what you worked on at Superchat.",
-            "Add a second real responsibility or achievement.",
-            "Add a third — keep them concrete and honest.",
+            "Developed and maintained Vend AI, a Shopify AI chatbot using React, Node.js, Prisma, and PostgreSQL.",
+            "Implemented Shopify webhook processing, REST/GraphQL API integrations, and production bug fixes.",
+            "Delivered performance optimizations and chatbot UI enhancements for a live e-commerce AI product.",
         ],
     },
     {
         accent: "#4a80db",
-        techStack: ["React Native", "Expo", "TypeScript", "Appwrite"],
+        techStack: ["React", "Next.js", "Node.js", "Laravel", "REST APIs"],
         imgPath: "/images/companies/ibix.svg",
         logoPath: "/images/companies/ibix-logo.svg",
-        title: "Your Role — Ibix Global Tech",
-        date: "Month Year - Month Year",
+        title: "Full Stack Intern — Ibix Global Tech",
+        date: "May 2026 - Aug 2026",
         responsibilities: [
-            "Describe what you worked on at Ibix Global Tech.",
-            "Add a second real responsibility or achievement.",
-            "Add a third — keep them concrete and honest.",
+            "Engineered full-stack features across client projects using React, Next.js, Node.js, and Laravel.",
+            "Contributed to OmniBix, an AI voice automation platform, by building APIs and enhancing AI agent workflows.",
+            "Implemented automation features and improved platform performance across production client projects.",
         ],
     },
     // {
@@ -173,19 +173,19 @@ const expCards = [
     //         "Third responsibility.",
     //     ],
     // },
-    {
-        accent: "#0075be",
-        techStack: ["Add", "your", "tech"],
-        imgPath: "/images/companies/ubl.svg",
-        logoPath: "/images/companies/ubl-logo.svg",
-        title: "Your Role — UBL",
-        date: "Month Year - Month Year",
-        responsibilities: [
-            "Describe your work at UBL.",
-            "Second responsibility.",
-            "Third responsibility.",
-        ],
-    },
+    // {
+    //     accent: "#0075be",
+    //     techStack: ["Add", "your", "tech"],
+    //     imgPath: "/images/companies/ubl.svg",
+    //     logoPath: "/images/companies/ubl-logo.svg",
+    //     title: "Your Role — UBL",
+    //     date: "Month Year - Month Year",
+    //     responsibilities: [
+    //         "Describe your work at UBL.",
+    //         "Second responsibility.",
+    //         "Third responsibility.",
+    //     ],
+    // },
 ];
 
 
@@ -365,6 +365,17 @@ const projects = [
         bg: "bg-[#ffefdb]",
         github: "https://github.com/huzaifa-gamedev/cs50-portal",
     },
+      {
+        id: "Plotkin",
+        title: "AI-Powered Movie Recommendation Platform",
+        desc: "Content-based movie recommendation platform that discovers similar films using TF-IDF vectorization, cosine similarity, and real-time TMDB integration.",
+        category: "AI/ML",
+        tags: ["Python", "Scikit-learn", "TF-IDF", "Cosine Similarity", "Pandas", "NumPy", "SciPy", "FastAPI", "Streamlit", "TMDB API"],
+        image: "/images/projects/plotkin.webp",
+        bg: "bg-[#e8f3ff]",
+        github: "https://github.com/huzaifa-ai-ml/plotkin",
+        live: "https://plotkin.streamlit.app/",
+    },
     {
         id: "Customer Churn Prediction",
         title: "Machine Learning Prediction System",
@@ -537,28 +548,28 @@ const certifications = [
 ];
 
 // Leadership & Achievements section. Edit the text / numbers below to taste.
-// The photo goes at:  public/images/leadership/smec-award.jpg
+// The photo goes at:  public/images/leadership/smec-award.webp
 const leadership = {
     eyebrow: "University Leadership",
     role: "FIFA Event Lead — SMEC",
-    image: "/images/leadership/smec-award.jpg",
+    image: "/images/leadership/smec-awards.webp",
     imageAlt:
         "Muhammad Huzaifa Karim receiving the FIFA event organizing award at SMEC",
     ribbon: "🏆 Organizing Award",
-    captionHighlight: "SMEC '26",
-    caption: "— receiving the FIFA event organizing award",
-    editions: ["SMEC '24", "SMEC '26"],
+    captionHighlight: "",
+    caption: "SMEC — four editions of participation, leadership & achievements",
+    editions: ["SMEC '22","SMEC '26"],
     blurb:
         "Led the FIFA gaming module at my university's flagship engineering competition across two editions — owning the bracket format, volunteer roster, and match-day operations for a packed tournament floor of 100+ players.",
     stats: [
         { n: "100+", l: "Participants" },
         { n: "2×", l: "Editions Led" },
-        { n: "2+", l: "Awards Won" },
+        { n: "2", l: "Awards Won" },
     ],
     highlights: [
         "Designed the tournament format, scheduling & on-the-spot dispute handling.",
         "Coordinated a volunteer team to keep matches running back-to-back.",
-        "Recognized by the organizing committee across both editions.",
+        "Contributed to four SMEC editions, progressing from team member to FIFA event lead.",
     ],
 };
 
