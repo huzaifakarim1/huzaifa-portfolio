@@ -401,7 +401,7 @@ const socialImgs = [
     },
     {
         name: "linkedin",
-        url: "http://www.linkedin.com/in/muhammad-huzaifa-karim-590k",
+        url: "http://www.linkedin.com/in/muhammad-huzaifa-karim",
         imgPath: "/images/linkedin.png",
     },
 ];
