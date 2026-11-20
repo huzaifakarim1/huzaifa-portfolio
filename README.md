@@ -9,7 +9,6 @@
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 ![Three.js](https://img.shields.io/badge/Three.js-000000?style=for-the-badge&logo=three.js&logoColor=white)
 ![GSAP](https://img.shields.io/badge/GSAP-88CE02?style=for-the-badge&logo=greensock&logoColor=white)
-![React Three Fiber](https://img.shields.io/badge/React%20Three%20Fiber-000000?style=for-the-badge&logo=three.js&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white)
 ![EmailJS](https://img.shields.io/badge/EmailJS-FF6C37?style=for-the-badge&logo=maildotru&logoColor=white)
 ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white)
@@ -17,7 +16,7 @@
 ![License MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
 
-🔗 **Live Demo:** Coming Soon!
+🔗 **Live Demo:** Coming Soon — deploying to Vercel with a custom domain shortly.
 
 ---
 
@@ -47,7 +46,7 @@ Key highlights include:
 
 ---
 
-## 📸 Screenshots & Preview
+## 🎥 Preview
 
 > Put your images and GIF in a **`docs/screenshots/`** folder at the repo
 > root (create it), then commit them — GitHub renders these relative paths.
@@ -55,19 +54,6 @@ Key highlights include:
 > Record the preview GIF with ScreenToGif / Kap / LICEcap while scrolling
 > through the site.
 
-### Hero & Projects
-<!-- ![Hero section](docs/screenshots/hero.png) -->
-<!-- ![Projects showcase](docs/screenshots/projects.png) -->
-
-### Certifications & Experience
-<!-- ![Certifications marquee](docs/screenshots/certifications.png) -->
-<!-- ![Experience timeline](docs/screenshots/experience.png) -->
-
-### Leadership & Contact
-<!-- ![Leadership section](docs/screenshots/leadership.png) -->
-<!-- ![Contact section](docs/screenshots/contact.png) -->
-
-### Preview GIF
 <!-- ![Full-page scroll preview](docs/screenshots/preview.gif) -->
 
 > Uncomment each line (remove the `<!--` and `-->`) once the matching file
@@ -198,7 +184,7 @@ Almost everything on the site is data-driven from **`src/constants/index.js`**:
 - `expCards` — work experience & tech stack
 - `socialImgs` / `navLinks` — footer socials & navbar links
 
-Resume PDFs go in `public/resume/`, and the leadership photo goes in
+Resume PDFs go in `public/resume/`, and the leadership photos go in
 `public/images/leadership/` — see the `README.txt` files in those folders for
 exact paths and naming.
 
@@ -206,26 +192,57 @@ exact paths and naming.
 
 ## 📜 License
 
-This project is licensed under the **MIT License** — see the `LICENSE` file
+This project is licensed under the **MIT License** — see the [`LICENSE`](LICENSE) file
 for details.
+
+---
+
+## 🙏 Acknowledgements
+
+This portfolio was built standing on the shoulders of some great open-source
+tools and services. Big thanks to:
+
+- **[React](https://react.dev/)** — the UI library that makes component-driven development a joy.
+- **[Vite](https://vitejs.dev/)** — lightning-fast build tool and dev server.
+- **[Tailwind CSS](https://tailwindcss.com/)** — utility-first CSS that keeps styling consistent and maintainable.
+- **[Three.js](https://threejs.org/) & [React Three Fiber](https://docs.pmnd.rs/react-three-fiber)** — bringing 3D scenes to the web without losing my mind.
+- **[@react-three/drei](https://github.com/pmndrs/drei)** — the helper library that makes R3F so much less painful.
+- **[GSAP](https://gsap.com/)** — the gold standard for smooth, scroll-driven animations.
+- **[EmailJS](https://www.emailjs.com/)** — contact form email delivery without needing a backend.
+- **[Vercel](https://vercel.com/)** — frictionless hosting and deployment for React/Vite projects.
+- **[Google Fonts](https://fonts.google.com/)** — clean, accessible typography.
+- **[Shields.io](https://shields.io/)** — the badge generator used throughout this README.
 
 ---
 
 ## ✍️ Author
 
-**Muhammad Huzaifa Karim**
-[GitHub](https://github.com/huzaifakarim1) · [LinkedIn](http://www.linkedin.com/in/muhammad-huzaifa-karim-590k) · karimhuzaifa590@gmail.com
+**Muhammad Huzaifa Karim**  
+[GitHub Profile](https://github.com/huzaifakarim1)
+
+---
+
+## 📬 Contact
+
+For questions, feedback, or collaboration:
+
+- **GitHub Issues** — report bugs or request features
+- **Email** — karimhuzaifa590@gmail.com
+- **LinkedIn** — [Muhammad Huzaifa Karim](https://www.linkedin.com/in/huzaifa-karim-b98551268/)
 
 ---
 
 ## 🌟 Show Your Support
 
-If you found this portfolio helpful or inspiring, please consider:
+If you found this project helpful or inspiring, please consider:
 
 - ⭐ Starring the repository
-- 🐛 Reporting bugs
-- 💡 Suggesting new features
+- 🐛 Reporting bugs or issues
+- 💡 Suggesting improvements
+- 📢 Sharing the project
+- 🤝 Contributing to the codebase
 
 ---
 
 © 2026 Muhammad Huzaifa Karim
+
