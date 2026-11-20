@@ -220,7 +220,7 @@ For questions, feedback, or collaboration:
 
 - **GitHub Issues** — report bugs or request features
 - **Email** — karimhuzaifa590@gmail.com
-- **LinkedIn** — [Muhammad Huzaifa Karim](https://www.linkedin.com/in/huzaifa-karim-b98551268/)
+- **LinkedIn** — [Muhammad Huzaifa Karim](https://www.linkedin.com/in/muhammad-huzaifa-karim)
 
 ---
 
