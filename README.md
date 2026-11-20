@@ -48,16 +48,7 @@ Key highlights include:
 
 ## 🎥 Preview
 
-> Put your images and GIF in a **`docs/screenshots/`** folder at the repo
-> root (create it), then commit them — GitHub renders these relative paths.
-> Suggested names are used below; rename the files or the links to match.
-> Record the preview GIF with ScreenToGif / Kap / LICEcap while scrolling
-> through the site.
-
-<!-- ![Full-page scroll preview](docs/screenshots/preview.gif) -->
-
-> Uncomment each line (remove the `<!--` and `-->`) once the matching file
-> exists. Keep images ≤ ~1–2 MB and the GIF ≤ ~10 MB so the README stays fast.
+![Portfolio Preview](docs/screenshots/preview.gif)
 
 ---
 
