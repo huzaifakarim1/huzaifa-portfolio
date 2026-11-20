@@ -7,14 +7,18 @@ import LazyView from "../components/LazyView";
 
 // Initialize EmailJS once — blockHeadless blocks automated headless browsers,
 // limitRate throttles SDK-level requests to 1 per 10 s for this form.
-emailjs.init({
-  publicKey: import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
-  blockHeadless: true,
-  limitRate: {
-    id: "contact-form",
-    throttle: 10000,
-  },
-});
+if (import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY) {
+  emailjs.init({
+    publicKey: import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
+    blockHeadless: true,
+    limitRate: {
+      id: "contact-form",
+      throttle: 10000,
+    },
+  });
+}
+
+const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || "";
 
 const RATE_LIMIT = 3;          // max sends
 const WINDOW_MS = 2 * 60 * 60 * 1000; // 2 hours in ms
@@ -82,7 +86,7 @@ const Contact = () => {
     if (formRef.current?.website?.value) return; // honeypot: bot detected
 
     // reCAPTCHA must be solved before submitting
-    if (!captchaDone) {
+    if (RECAPTCHA_SITE_KEY && !captchaDone) {
       setStatus("nocaptcha");
       setTimeout(() => setStatus("idle"), 3000);
       return;
@@ -206,18 +210,20 @@ const Contact = () => {
                   </p>
                 )}
 
-                {/* reCAPTCHA v2 — must be solved before submitting */}
-                <div className="flex justify-center">
-                  <ReCAPTCHA
-                    ref={recaptchaRef}
-                    sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-                    theme="dark"
-                    onChange={(token) => setCaptchaDone(!!token)}
-                    onExpired={() => setCaptchaDone(false)}
-                  />
-                </div>
+                {/* reCAPTCHA v2 — only renders when site key is configured */}
+                {RECAPTCHA_SITE_KEY && (
+                  <div className="flex justify-center">
+                    <ReCAPTCHA
+                      ref={recaptchaRef}
+                      sitekey={RECAPTCHA_SITE_KEY}
+                      theme="dark"
+                      onChange={(token) => setCaptchaDone(!!token)}
+                      onExpired={() => setCaptchaDone(false)}
+                    />
+                  </div>
+                )}
 
-                <button type="submit" disabled={loading || isRateLimited || !captchaDone}>
+                <button type="submit" disabled={loading || isRateLimited || (RECAPTCHA_SITE_KEY && !captchaDone)}>
                   <div className="cta-button group" data-status={status}>
                     <div className="bg-circle" />
                     <p className="text">{buttonLabel}</p>
