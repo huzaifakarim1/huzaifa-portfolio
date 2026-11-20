@@ -192,8 +192,9 @@ for details.
 ## 🙏 Acknowledgements
 
 This portfolio was built standing on the shoulders of some great open-source
-tools and services. Big thanks to:
+tools, resources, and mentors. Big thanks to:
 
+- **[Adrian Hajdin - JS Mastery](https://github.com/adrianhajdin)** — for the design inspiration, assets, and 3D models provided for this portfolio.
 - **[React](https://react.dev/)** — the UI library that makes component-driven development a joy.
 - **[Vite](https://vitejs.dev/)** — lightning-fast build tool and dev server.
 - **[Tailwind CSS](https://tailwindcss.com/)** — utility-first CSS that keeps styling consistent and maintainable.
