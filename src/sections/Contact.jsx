@@ -210,9 +210,9 @@ const Contact = () => {
                   </p>
                 )}
 
-                {/* reCAPTCHA v2 — only renders when site key is configured */}
+                {/* reCAPTCHA v2 — scaled down to stay subtle and prevent mobile overflow */}
                 {RECAPTCHA_SITE_KEY && (
-                  <div className="flex justify-center">
+                  <div className="recaptcha-wrapper">
                     <ReCAPTCHA
                       ref={recaptchaRef}
                       sitekey={RECAPTCHA_SITE_KEY}

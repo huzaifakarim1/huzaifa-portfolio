@@ -894,3 +894,32 @@ section {
 .card:hover::before {
   opacity: 1;
 }
+
+/* ── reCAPTCHA widget sizing ───────────────────────────────────────────────
+   Google's widget is a fixed 300×74 px iframe that cannot be resized via
+   props. We scale the wrapper down and clip the extra white-space so it
+   stays compact and never overflows the form card on small screens.
+   scale(0.72) on mobile  → effective width ≈ 216 px  (fits inside any card)
+   scale(0.82) on ≥640 px → effective width ≈ 246 px  (subtle on desktop)
+   height is locked to the scaled iframe height so there's no dead space.   */
+.recaptcha-wrapper {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  height: 54px;           /* 74 × 0.72 ≈ 53 px — clamp to this on mobile */
+}
+
+.recaptcha-wrapper > div {
+  transform: scale(0.72);
+  transform-origin: center top;
+  flex-shrink: 0;
+}
+
+@media (min-width: 640px) {
+  .recaptcha-wrapper {
+    height: 61px;         /* 74 × 0.82 ≈ 61 px */
+  }
+  .recaptcha-wrapper > div {
+    transform: scale(0.82);
+  }
+}
