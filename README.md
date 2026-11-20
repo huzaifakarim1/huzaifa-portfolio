@@ -16,7 +16,7 @@
 ![License MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
 
-🔗 **Live Demo:** Coming Soon — deploying to Vercel with a custom domain shortly.
+🔗 **Live Demo:** [huzaifakarim.com](https://huzaifakarim.com)
 
 ---
 
@@ -139,6 +139,7 @@ Create a `.env` file in the project root:
 VITE_APP_EMAILJS_SERVICE_ID=your_emailjs_service_id
 VITE_APP_EMAILJS_TEMPLATE_ID=your_emailjs_template_id
 VITE_APP_EMAILJS_PUBLIC_KEY=your_emailjs_public_key
+VITE_RECAPTCHA_SITE_KEY=your_google_recaptcha_v2_site_key
 ```
 
 ### 4. Run in development

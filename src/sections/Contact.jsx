@@ -1,8 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
+import ReCAPTCHA from "react-google-recaptcha";
 import TitleHeader from "../components/TitleHeader";
 import ContactExperience from "../components/Models/contact/ContactExperience";
 import LazyView from "../components/LazyView";
+
+// Initialize EmailJS once — blockHeadless blocks automated headless browsers,
+// limitRate throttles SDK-level requests to 1 per 10 s for this form.
+emailjs.init({
+  publicKey: import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
+  blockHeadless: true,
+  limitRate: {
+    id: "contact-form",
+    throttle: 10000,
+  },
+});
 
 const RATE_LIMIT = 3;          // max sends
 const WINDOW_MS = 2 * 60 * 60 * 1000; // 2 hours in ms
@@ -20,10 +32,12 @@ const MAX_CHARS = 500;
 
 const Contact = () => {
   const formRef = useRef(null);
+  const recaptchaRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("idle");
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [rateLimitMsg, setRateLimitMsg] = useState("");
+  const [captchaDone, setCaptchaDone] = useState(false);
 
   // Check on mount and update countdown every second if blocked
   const checkRateLimit = () => {
@@ -67,6 +81,13 @@ const Contact = () => {
     if (loading) return;
     if (formRef.current?.website?.value) return; // honeypot: bot detected
 
+    // reCAPTCHA must be solved before submitting
+    if (!captchaDone) {
+      setStatus("nocaptcha");
+      setTimeout(() => setStatus("idle"), 3000);
+      return;
+    }
+
     const block = checkRateLimit();
     if (block) { setRateLimitMsg(block); return; }
 
@@ -76,7 +97,6 @@ const Contact = () => {
         import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
         formRef.current,
-        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
       );
       // Record this send
       const data = getRateLimitData();
@@ -85,9 +105,13 @@ const Contact = () => {
 
       setForm({ name: "", email: "", message: "" });
       setRateLimitMsg("");
+      setCaptchaDone(false);
+      recaptchaRef.current?.reset();
       flash("success");
     } catch (error) {
       console.error("EmailJS Error:", error);
+      recaptchaRef.current?.reset();
+      setCaptchaDone(false);
       flash("error");
     } finally {
       setLoading(false);
@@ -102,6 +126,8 @@ const Contact = () => {
     ? "Message Sent ✓"
     : status === "error"
     ? "Failed — Retry"
+    : status === "nocaptcha"
+    ? "Solve CAPTCHA first ↓"
     : "Send Message";
 
   return (
@@ -180,7 +206,18 @@ const Contact = () => {
                   </p>
                 )}
 
-                <button type="submit" disabled={loading || isRateLimited}>
+                {/* reCAPTCHA v2 — must be solved before submitting */}
+                <div className="flex justify-center">
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                    theme="dark"
+                    onChange={(token) => setCaptchaDone(!!token)}
+                    onExpired={() => setCaptchaDone(false)}
+                  />
+                </div>
+
+                <button type="submit" disabled={loading || isRateLimited || !captchaDone}>
                   <div className="cta-button group" data-status={status}>
                     <div className="bg-circle" />
                     <p className="text">{buttonLabel}</p>
